@@ -1,0 +1,20 @@
+{
+  "nonew":true,
+  "latedef":true,
+  "unused":"vars",
+  "noarg":true,
+  "trailing":true,
+  "white":true,
+  "noempty":true,
+  "quotmark":true,
+  "strict":false,
+  "undef":false,
+  "debug":true,
+  "bitwise":true,
+  "newcap":true,
+  "onevar":true,
+  "devel":true,
+  "camelcase":true,
+  "nonbsp":true,
+  "freeze":true
+}
