@@ -5,7 +5,8 @@
 {
     "use strict";
 
-    require(["point"], function ()
+    require(["geometrix"], function ($M)
     {
+        console.log($M);
     });
 })();

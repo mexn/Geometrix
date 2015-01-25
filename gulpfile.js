@@ -21,7 +21,7 @@ gulp.task("optimize", function ()
 {
     requireJs({
         baseUrl: "src",
-        name: "main",
+        name: "geometrix",
         out: "geometrix.js"
     })  .pipe(stripDebug())
         .pipe(uglify())
