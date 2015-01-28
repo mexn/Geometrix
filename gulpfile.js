@@ -35,7 +35,8 @@ gulp.task("tdd", function (done)
     karma.start({
         configFile: __dirname + "/karma.conf.js",
         singleRun: false,
-        autoWatch: true
+        autoWatch: true,
+        reporters: ["progress"]
     }, done);
 });
 
