@@ -4,12 +4,20 @@
 
     QUnit.module("Geometrix.Point");
 
-    QUnit.test("constructor", function ()
+    // test cases
+    [
+        { x: 2,         y: 3,           ex: 2,  ey: 3   },
+        { x: undefined, y: undefined,   ex: 0,  ey: 0   },
+        { x: -2,        y: -3,          ex: -2, ey: -3  }
+    ].forEach(function (o, i)
     {
-        var p = new $M.Geometrix.Point(2, 3);
+        QUnit.test("constructor #" + (i + 1), function ()
+        {
+            var p = new $M.Geometrix.Point(o.x, o.y);
 
-        QUnit.equal(p.x, 2, "prop x");
-        QUnit.equal(p.y, 3, "prop y");
+            QUnit.equal(p.x, o.ex, "prop x");
+            QUnit.equal(p.y, o.ey, "prop y");
+        });
     });
 
     // test cases
@@ -18,7 +26,7 @@
         { x1: 645,   y1: 463,   x2: 782,    y2: 71, ex: 1427,   ey: 534 }
     ].forEach(function (o, i)
     {
-        QUnit.test("add" + (i + 1), function ()
+        QUnit.test("add #" + (i + 1), function ()
         {
             var p1 = new $M.Geometrix.Point(o.x1, o.y1),
                 p2 = new $M.Geometrix.Point(o.x2, o.y2);
