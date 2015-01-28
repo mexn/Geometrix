@@ -5,7 +5,7 @@
 {
     "use strict";
 
-    require(["geometrix"], function ($M)
+    require(["index"], function ($M)
     {
         console.log($M);
     });

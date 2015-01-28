@@ -1,20 +1,25 @@
 /**
- * Created by Markus on 16.01.2015.
+ * Created by Markus on 25.01.2015.
  */
 (function ()
 {
     "use strict";
 
+    var geometrix = function ()
+    {
+        /**
+         * @namespace $M.Geometrix
+         */
+        if (!window.$M.Geometrix)
+            window.$M.Geometrix = {};
+
+        return window.$M;
+    };
+
     var define = window.define || null;
 
-    if (define)
-    {
-        define([
-            "./namespace",
-            "./point"
-        ], function ($M)
-        {
-            return $M;
-        });
-    }
+    if (define && define.amd)
+        define(["./m"], geometrix);
+    else
+        return geometrix();
 })();

@@ -7,6 +7,7 @@ var stripDebug = require("gulp-strip-debug");
 var uglify = require("gulp-uglify");
 var karma = require("karma").server;
 var requireJs = require("gulp-requirejs");
+var jsdoc = require("gulp-jsdoc");
 
 // JS hint task
 gulp.task("jshint", function()
@@ -21,7 +22,7 @@ gulp.task("optimize", function ()
 {
     requireJs({
         baseUrl: "src",
-        name: "geometrix",
+        name: "index",
         out: "geometrix.js"
     })  .pipe(stripDebug())
         .pipe(uglify())
@@ -47,4 +48,28 @@ gulp.task("test", function (done)
     }, done);
 });
 
-gulp.task("default", ["jshint", "scripts"], function () {});
+gulp.task("doc", function ()
+{
+    gulp.src(["./src/*.js"])
+        .pipe(jsdoc("./doc", {
+            path: "ink-docstrap",
+            systemName      : "Geometrix",
+            footer          : "footer",
+            copyright       : "copyright",
+            navType         : "vertical",
+            theme           : "journal",
+            linenums        : false,
+            collapseSymbols : false,
+            inverseNav      : true,
+            syntaxTheme     : "dark"
+        }, {
+            name: "Geometrix",
+            version: "0.0.0",
+            licenses: ["MIT"],
+            description: "abctest"
+        }));
+});
+
+gulp.task("default", ["jshint"], function () {});
+
+gulp.task("ci", ["jshint", "optimize", "test", "doc"], function () {});
