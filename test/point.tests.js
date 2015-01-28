@@ -14,11 +14,11 @@
 
     // test cases
     [
-        { x1: 2,     y1: 3,     x2: 4,      y2: 5,  ex: 6,      ey: 8   },
+        { x1: 2,     y1: 3,     x2: 4,      y2: 5,  ex: 6,      ey: 8  },
         { x1: 645,   y1: 463,   x2: 782,    y2: 71, ex: 1427,   ey: 534 }
     ].forEach(function (o, i)
     {
-        QUnit.test("add" + i, function ()
+        QUnit.test("add" + (i + 1), function ()
         {
             var p1 = new $M.Geometrix.Point(o.x1, o.y1),
                 p2 = new $M.Geometrix.Point(o.x2, o.y2);
