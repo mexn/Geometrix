@@ -5,15 +5,15 @@
 {
     "use strict";
 
-    var geometrix = function ()
+    var geometrix = function ($M)
     {
         /**
          * @namespace $M.Geometrix
          */
-        if (!global.$M.Geometrix)
-            global.$M.Geometrix = {};
+        if (!$M.Geometrix)
+            $M.Geometrix = {};
 
-        return global.$M;
+        return $M;
     };
 
     var define = global.define || null;

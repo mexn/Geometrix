@@ -5,7 +5,7 @@
 {
     "use strict";
 
-    var triangle = function ()
+    var triangle = function ($M)
     {
         /**
          * Initial values for {@link $M.Geometrix.Triangle}
@@ -22,17 +22,10 @@
          */
         $M.Geometrix.Triangle = function (o)
         {
-            this._init();
         };
 
         $M.Geometrix.Triangle.prototype = {
-            /**
-             * @private
-             */
-            _init: function ()
-            {
 
-            }
         };
 
         Object.defineProperty($M.Geometrix.Triangle.prototype, "a", {
@@ -61,5 +54,5 @@
     if (define && define.amd)
         define(["./geometrix"], triangle);
     else
-        return triangle();
+        return triangle(global.$M);
 })(this);

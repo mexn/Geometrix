@@ -5,7 +5,7 @@
 {
     "use strict";
 
-    var point = function ()
+    var point = function ($M)
     {
         /**
          * A Point with coordinates
@@ -45,5 +45,5 @@
     if (define && define.amd)
         define(["./geometrix"], point);
     else
-        return point();
+        return point(global.$M);
 })(this);

@@ -2,10 +2,13 @@
 {
     "use strict";
 
-    QUnit.module("Geometrix.Triangle");
-
-    QUnit.test("constructor", function ()
+    define("../src/triangle", function ($M)
     {
-        ok(true);
+        QUnit.module("Geometrix.Triangle");
+
+        QUnit.test("constructor", function ()
+        {
+            ok(true);
+        });
     });
 })(QUnit);

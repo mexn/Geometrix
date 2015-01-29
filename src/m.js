@@ -7,24 +7,21 @@
 
     var m = function ()
     {
-        if (!global.$M)
-        {
+        if (global.$M)
+            return global.$M;
+
+        /**
+         * @namespace $M
+         */
+        return {
             /**
-             * @namespace $M
+             * @memberof! $M
+             * @static
              */
-            global.$M = {
-                /**
-                 * @memberof! $M
-                 * @static
-                 */
-                extend: function ()
-                {
-
-                }
-            };
-        }
-
-        return global.$M;
+            extend: function ()
+            {
+            }
+        };
     };
 
     var define = global.define || null;
@@ -32,5 +29,5 @@
     if (define && define.amd)
         define(m);
     else
-        return m();
+        global.$M = m();
 })(this);
