@@ -1,7 +1,7 @@
 /**
  * Created by Markus on 16.01.2015.
  */
-(function ()
+(function (global)
 {
     "use strict";
 
@@ -56,10 +56,10 @@
         return $M;
     };
 
-    var define = window.define || null;
+    var define = global.define || null;
 
     if (define && define.amd)
         define(["./geometrix"], triangle);
     else
         return triangle();
-})();
+})(this);
