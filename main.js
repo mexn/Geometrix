@@ -5,8 +5,9 @@
 {
     "use strict";
 
-    require(["index"], function ($M)
+    require(["src/index"], function ($M)
     {
         console.log($M);
+        debugger;
     });
 })();

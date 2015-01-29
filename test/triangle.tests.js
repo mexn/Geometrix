@@ -2,7 +2,7 @@
 {
     "use strict";
 
-    define("../src/triangle", function ($M)
+    define("../src/Triangle", function ($M)
     {
         QUnit.module("Geometrix.Triangle");
 

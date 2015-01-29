@@ -2,11 +2,11 @@
 {
     "use strict";
 
-    define(["../src/point"], function ($M)
+    define(["../src/Point"], function ($M)
     {
         QUnit.module("Geometrix.Point");
 
-        QUnit.test("constructor with defaults", function ()
+        QUnit.test("constructor with parameters", function ()
         {
             var p = new $M.Geometrix.Point(2, 3);
 
@@ -14,7 +14,7 @@
             QUnit.equal(p.y, 3, "prop y");
         });
 
-        QUnit.test("constructor with parameters", function ()
+        QUnit.test("constructor with defaults", function ()
         {
             var p = new $M.Geometrix.Point();
 
@@ -22,25 +22,75 @@
             QUnit.equal(p.y, 0, "prop y");
         });
 
-        QUnit.test("prototype.add intended", function ()
+        QUnit.test("constructor with coordinates object", function ()
         {
-            var p1 = new $M.Geometrix.Point(2, 3),
-                p2 = new $M.Geometrix.Point(4, 5);
+            var coords = { x: 2, y: 3},
+                p = new $M.Geometrix.Point(coords);
 
-            p1.add(p2);
-
-            QUnit.equal(p1.x, 6, "p1.x + p2.x");
-            QUnit.equal(p1.y, 8, "p1.y + p2.y");
+            QUnit.equal(p.x, coords.x, "prop x");
+            QUnit.equal(p.y, coords.y, "prop y");
         });
 
-        QUnit.test("prototype.add wrong", function ()
+        QUnit.test("prototype.move w/o parameters", function ()
         {
-            var p1 = new $M.Geometrix.Point(2, 3);
+            var p = new $M.Geometrix.Point(2, 3);
 
-            p1.add(null);
+            p.move();
 
-            QUnit.equal(p1.x, 2, "p1.x + p2.x");
-            QUnit.equal(p1.y, 3, "p1.y + p2.y");
+            QUnit.equal(p.x, 2, "prop x");
+            QUnit.equal(p.y, 3, "prop y");
+        });
+
+        QUnit.test("prototype.move w/ parameters", function ()
+        {
+            var p = new $M.Geometrix.Point(2, 3);
+
+            p.move(4, 5);
+
+            QUnit.equal(p.x, 6, "prop x");
+            QUnit.equal(p.y, 8, "prop y");
+        });
+
+        QUnit.test("prototype.move w/ object", function ()
+        {
+            var p = new $M.Geometrix.Point(2, 3),
+                coords = { x: 4, y: 5};
+
+            p.move(coords);
+
+            QUnit.equal(p.x, 6, "prop x");
+            QUnit.equal(p.y, 8, "prop y");
+        });
+
+        QUnit.test("prototype.moveTo w/o parameters", function ()
+        {
+            var p = new $M.Geometrix.Point(2, 3);
+
+            p.moveTo();
+
+            QUnit.equal(p.x, 2, "prop x");
+            QUnit.equal(p.y, 3, "prop y");
+        });
+
+        QUnit.test("prototype.move w/ parameters", function ()
+        {
+            var p = new $M.Geometrix.Point(2, 3);
+
+            p.moveTo(4, 5);
+
+            QUnit.equal(p.x, 4, "prop x");
+            QUnit.equal(p.y, 5, "prop y");
+        });
+
+        QUnit.test("prototype.moveTo w/ object", function ()
+        {
+            var p = new $M.Geometrix.Point(2, 3),
+                coords = { x: 4, y: 5};
+
+            p.moveTo(coords);
+
+            QUnit.equal(p.x, 4, "prop x");
+            QUnit.equal(p.y, 5, "prop y");
         });
     });
 })(QUnit);

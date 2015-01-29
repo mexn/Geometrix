@@ -8,29 +8,66 @@
     var point = function ($M)
     {
         /**
-         * A Point with coordinates
-         * @param [x=0] {Number} The x coordinate of the point
-         * @param [y=0] {Number} The y coordinate of the point
+         * A Point with coordinates.
+         * @param [x=0] {Number|$M.Geometrix~Coordinates} - The x-coordinate of the point. If of type {@link $M.Geometrix~Coordinates}, both coordinates are taken from there.
+         * @param [y=0] {Number} - The y-coordinate of the point.
          * @constructor
          */
         $M.Geometrix.Point = function (x, y)
         {
+            if (typeof(x) == "object")
+            {
+                y = x.y;
+                x = x.x;
+            }
+
             this.x = x || 0;
             this.y = y || 0;
         };
 
         $M.Geometrix.Point.prototype = {
             /**
-             * Adds one point to another. Adding two points moves the first one.
-             * @param p {$M.Geometrix.Point} The point to add
+             * Moves the point the given amount of units in the given directions.
+             * @param x {Number|$M.Geometrix~Coordinates} - Move this units in x-direction. If of type {@link $M.Geometrix~Coordinates}, both directions are taken from there.
+             * @param [y] {Number} - Move this units in y-direction.
              * @returns {$M.Geometrix.Point} this
              */
-            add: function (p)
+            move: function (x, y)
             {
-                if (p instanceof $M.Geometrix.Point)
+                if (typeof(x) == "object")
                 {
-                    this.x += p.x;
-                    this.y += p.y;
+                    y = x.y;
+                    x = x.x;
+                }
+
+                this.x += x || 0;
+                this.y += y || 0;
+
+                return this;
+            },
+
+            /**
+             * Moves the point to the given coordinates.
+             * @param x {Number|$M.Geometrix~Coordinates} - x-coordinate to move to. If of type {@link $M.Geometrix~Coordinates}, both coordinates are taken from there.
+             * @param [y] {Number} - y-coordinate to move to.
+             * @returns {$M.Geometrix.Point} this
+             */
+            moveTo: function (x, y)
+            {
+                if (typeof(x) == "object")
+                {
+                    y = x.y;
+                    x = x.x;
+                }
+
+                if (x !== null && x !== undefined)
+                {
+                    this.x = x;
+                }
+
+                if (y !== null && y !== undefined)
+                {
+                    this.y = y;
                 }
 
                 return this;
@@ -43,7 +80,7 @@
     var define = global.define || null;
 
     if (define && define.amd)
-        define(["./geometrix"], point);
+        define(["./Geometrix"], point);
     else
         return point(global.$M);
 })(this);

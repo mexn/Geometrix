@@ -13,13 +13,20 @@
         if (!$M.Geometrix)
             $M.Geometrix = {};
 
+        /**
+         * A coordinates-object
+         * @typedef {Object} $M.Geometrix~Coordinates
+         * @property x {Number} - x-coordinate
+         * @property y {Number} - y-coordinate
+         */
+
         return $M;
     };
 
     var define = global.define || null;
 
     if (define && define.amd)
-        define(["./m"], geometrix);
+        define(["./M"], geometrix);
     else
         return geometrix();
 })(this);
