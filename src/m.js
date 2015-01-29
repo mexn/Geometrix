@@ -1,19 +1,18 @@
 /**
  * Created by Markus on 25.01.2015.
  */
-(function ()
+(function (global)
 {
     "use strict";
 
     var m = function ()
     {
-
-        if (!window.$M)
+        if (!global.$M)
         {
             /**
              * @namespace $M
              */
-            window.$M = {
+            global.$M = {
                 /**
                  * @memberof! $M
                  * @static
@@ -25,13 +24,13 @@
             };
         }
 
-        return window.$M;
+        return global.$M;
     };
 
-    var define = window.define || null;
+    var define = global.define || null;
 
     if (define && define.amd)
         define(m);
     else
         return m();
-})();
+})(this);
