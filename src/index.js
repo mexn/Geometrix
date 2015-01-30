@@ -10,8 +10,8 @@
     if (define && define.amd)
     {
         define([
-            "./_Point",
-            "./_Triangle"
+            "./Point",
+            "./Triangle"
         ], function ($M)
         {
             return $M;

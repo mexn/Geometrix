@@ -52,7 +52,7 @@
     var define = global.define || null;
 
     if (define && define.amd)
-        define(["./_Geometrix"], triangle);
+        define(["./Geometrix"], triangle);
     else
         return triangle(global.$M);
 })(this);
