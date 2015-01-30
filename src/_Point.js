@@ -80,7 +80,7 @@
     var define = global.define || null;
 
     if (define && define.amd)
-        define(["./Geometrix"], point);
+        define(["./_Geometrix"], point);
     else
         return point(global.$M);
 })(this);

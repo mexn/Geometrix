@@ -26,7 +26,7 @@
     var define = global.define || null;
 
     if (define && define.amd)
-        define(["./M"], geometrix);
+        define(["./_M"], geometrix);
     else
         return geometrix();
 })(this);
