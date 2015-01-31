@@ -10,8 +10,34 @@
         /**
          * @namespace $M.Geometrix
          */
-        if (!$M.Geometrix)
-            $M.Geometrix = {};
+        if ($M.Geometrix)
+            return $M;
+
+        $M.Geometrix = {
+            /**
+             * @static
+             * @memberof! $M.Geometrix
+             * @function radToDeg
+             * @param rad
+             * @returns {number}
+             */
+            radToDeg: function (rad)
+            {
+                return rad * 180 / Math.PI;
+            },
+
+            /**
+             * @static
+             * @memberof! $M.Geometrix
+             * @function degToRad
+             * @param deg
+             * @returns {number}
+             */
+            degToRad: function (deg)
+            {
+                return deg * Math.PI / 180;
+            }
+        };
 
         /**
          * A coordinates-object
