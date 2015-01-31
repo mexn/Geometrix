@@ -8,6 +8,14 @@ var uglify = require("gulp-uglify");
 var karma = require("karma").server;
 var requireJs = require("gulp-requirejs");
 var jsdoc = require("gulp-jsdoc");
+var install = require("gulp-install");
+
+// install npm packages
+gulp.task("install", function()
+{
+    gulp.src(["./package.json"])
+        .pipe(install());
+});
 
 // JS hint task
 gulp.task("jshint", function()
@@ -76,4 +84,4 @@ gulp.task("doc", function ()
 
 gulp.task("default", ["jshint"], function () {});
 
-gulp.task("ci", ["jshint", "optimize", "test", "doc"], function () {});
+gulp.task("ci", ["install", "jshint", "optimize", "test", "doc"], function () {});
