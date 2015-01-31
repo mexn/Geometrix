@@ -8,11 +8,18 @@
     var triangle = function ($M)
     {
         /**
-         * Initial values for {@link $M.Geometrix.Triangle}
+         * Initial values for {@link $M.Geometrix.Triangle}.
+         * Omitted properties get calculated by the given, where possible.
          * @typedef {Object} $M.Geometrix.Triangle~Options
-         * @property {Number} A - point A
-         * @property {Number} B - point B
-         * @property {Number} C - point C
+         * @property {$M.Geometrix.Point} [A] - point A
+         * @property {$M.Geometrix.Point} [B] - point B
+         * @property {$M.Geometrix.Point} [C] - point C
+         * @property {Number} [a] - length of side a (segment BC)
+         * @property {Number} [b] - length of side b (segment AC)
+         * @property {Number} [c] - length of side c (segment AB)
+         * @property {Number} [alpha] - Angle between {@link b} and {@link c}
+         * @property {Number} [beta] - Angle between {@link c} and {@link a}
+         * @property {Number} [gamma] - Angle between {@link a} and {@link b}
          */
 
         /**
@@ -22,27 +29,36 @@
          */
         $M.Geometrix.Triangle = function (o)
         {
+            $M.extend(this, o);
         };
 
         $M.Geometrix.Triangle.prototype = {
 
         };
 
+        /**
+         * @description The length of side a (segment BC)
+         * @name a
+         * @type {Number}
+         * @memberof! $M.Geometrix.Triangle#
+         */
         Object.defineProperty($M.Geometrix.Triangle.prototype, "a", {
-            /**
-             * @name a
-             * @type {number}
-             * @description abcc
-             * @memberof! $M.Geometrix.Triangle#
-             */
             get: function ()
             {
-                if ("a" in this && typeof(this.a) != "undefined")
+                var b = this.b,
+                    c = this.c,
+                    alpha = this.alpha;
+
+                if (typeof(b) != "undefined" && typeof(c) != "undefined" && typeof(alpha) != "undefined")
                 {
-                    return this.a;
+                    this.a = Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) - 2 * b * c * Math.cos(alpha));
                 }
 
-                return this.A;
+                return this._a;
+            },
+            set: function (v)
+            {
+                this._a = v;
             }
         });
 
