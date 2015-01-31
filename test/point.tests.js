@@ -6,24 +6,30 @@
     {
         QUnit.module("Geometrix.Point");
 
-        QUnit.test("constructor with parameters", function ()
+        QUnit.test("constructor with parameters", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3);
 
             QUnit.equal(p.x, 2, "prop x");
             QUnit.equal(p.y, 3, "prop y");
         });
 
-        QUnit.test("constructor with defaults", function ()
+        QUnit.test("constructor with defaults", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point();
 
             QUnit.equal(p.x, 0, "prop x");
             QUnit.equal(p.y, 0, "prop y");
         });
 
-        QUnit.test("constructor with coordinates object", function ()
+        QUnit.test("constructor with coordinates object", function (assert)
         {
+            assert.expect(2);
+
             var coords = { x: 2, y: 3},
                 p = new $M.Geometrix.Point(coords);
 
@@ -31,8 +37,10 @@
             QUnit.equal(p.y, coords.y, "prop y");
         });
 
-        QUnit.test("prototype.move w/o parameters", function ()
+        QUnit.test("prototype.move w/o parameters", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3);
 
             p.move();
@@ -41,8 +49,10 @@
             QUnit.equal(p.y, 3, "prop y");
         });
 
-        QUnit.test("prototype.move w/ parameters", function ()
+        QUnit.test("prototype.move w/ parameters", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3);
 
             p.move(4, 5);
@@ -51,8 +61,10 @@
             QUnit.equal(p.y, 8, "prop y");
         });
 
-        QUnit.test("prototype.move w/ object", function ()
+        QUnit.test("prototype.move w/ object", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3),
                 coords = { x: 4, y: 5};
 
@@ -62,8 +74,10 @@
             QUnit.equal(p.y, 8, "prop y");
         });
 
-        QUnit.test("prototype.moveTo w/o parameters", function ()
+        QUnit.test("prototype.moveTo w/o parameters", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3);
 
             p.moveTo();
@@ -72,8 +86,10 @@
             QUnit.equal(p.y, 3, "prop y");
         });
 
-        QUnit.test("prototype.move w/ parameters", function ()
+        QUnit.test("prototype.move w/ parameters", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3);
 
             p.moveTo(4, 5);
@@ -82,8 +98,10 @@
             QUnit.equal(p.y, 5, "prop y");
         });
 
-        QUnit.test("prototype.moveTo w/ object", function ()
+        QUnit.test("prototype.moveTo w/ object", function (assert)
         {
+            assert.expect(2);
+
             var p = new $M.Geometrix.Point(2, 3),
                 coords = { x: 4, y: 5};
 
