@@ -1,6 +1,7 @@
 /**
  * Created by Markus on 16.01.2015.
  */
+/* istanbul ignore next */
 (function (global)
 {
     "use strict";

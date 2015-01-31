@@ -73,12 +73,15 @@ gulp.task("doc", function ()
             linenums        : false,
             collapseSymbols : false,
             inverseNav      : true,
-            syntaxTheme     : "dark"
+            syntaxTheme     : "dark",
+            plugins        : ["plugins/markdown"]
         }, {
             name: "Geometrix",
             version: "0.0.0",
             licenses: ["MIT"],
             description: "abctest"
+        }, {
+            showPrivate: true
         }));
 });
 

@@ -1,14 +1,15 @@
 /**
  * Created by Markus on 25.01.2015.
  */
-(function (global)
+(function ()
 {
     "use strict";
 
-    var m = function ()
+    var m = function ($M)
     {
-        if (global.$M)
-            return global.$M;
+        /* istanbul ignore if */
+        if ($M)
+            return $M;
 
         /**
          * @namespace $M
@@ -49,10 +50,23 @@
         };
     };
 
-    var define = global.define || null;
-
-    if (define && define.amd)
-        define(m);
-    else
-        global.$M = m();
-})(this);
+    /* istanbul ignore next */
+    (function (global, factory)
+    {
+        /* TODO
+         if (typeof(exports) === "object")
+         {
+         module.exports = factory();
+         }
+         else
+         */
+        if (typeof(define) === "function" && define.amd)
+        {
+            define(["./M"], factory);
+        }
+        else
+        {
+            global.$M = factory(global.$M);
+        }
+    })(this, m);
+})();

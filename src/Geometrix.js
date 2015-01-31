@@ -1,18 +1,19 @@
 /**
  * Created by Markus on 25.01.2015.
  */
-(function (global)
+(function ()
 {
     "use strict";
 
     var geometrix = function ($M)
     {
-        /**
-         * @namespace $M.Geometrix
-         */
+        /* istanbul ignore if */
         if ($M.Geometrix)
             return $M;
 
+        /**
+         * @namespace $M.Geometrix
+         */
         $M.Geometrix = {
             /**
              * @static
@@ -49,10 +50,23 @@
         return $M;
     };
 
-    var define = global.define || null;
-
-    if (define && define.amd)
-        define(["./M"], geometrix);
-    else
-        return geometrix();
-})(this);
+    /* istanbul ignore next */
+    (function (global, factory)
+    {
+        /* TODO
+         if (typeof(exports) === "object")
+         {
+         module.exports = factory();
+         }
+         else
+         */
+        if (typeof(define) === "function" && define.amd)
+        {
+            define(["./M"], factory);
+        }
+        else
+        {
+            global.$M = factory(global.$M);
+        }
+    })(this, geometrix);
+})();

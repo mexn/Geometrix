@@ -1,7 +1,7 @@
 /**
  * Created by Markus on 16.01.2015.
  */
-(function (global)
+(function ()
 {
     "use strict";
 
@@ -17,13 +17,13 @@
          * @property {Number} [a] - length of side a (segment BC)
          * @property {Number} [b] - length of side b (segment AC)
          * @property {Number} [c] - length of side c (segment AB)
-         * @property {Number} [alpha] - Angle between {@link b} and {@link c}
-         * @property {Number} [beta] - Angle between {@link c} and {@link a}
-         * @property {Number} [gamma] - Angle between {@link a} and {@link b}
+         * @property {Number} [alpha] - Angle between sides b and c
+         * @property {Number} [beta] - Angle between sides c and a
+         * @property {Number} [gamma] - Angle between sides a and b
          */
 
         /**
-         *
+         * A triangle
          * @param o {$M.Geometrix.Triangle~Options} - Initial values
          * @constructor
          */
@@ -33,7 +33,16 @@
         };
 
         $M.Geometrix.Triangle.prototype = {
-
+            /**
+             * Validates a property
+             * @param property {object} The property to check
+             * @returns {boolean} `true` if the property is neither `undefined` nor `null`, `false` otherwise.
+             * @private
+             */
+            _has: function (property)
+            {
+                return !!(typeof(property) != "undefined" && property !== null);
+            }
         };
 
         /**
@@ -47,11 +56,27 @@
             {
                 var b = this.b,
                     c = this.c,
-                    alpha = this.alpha;
+                    alpha = this.alpha,
+                    B = this.B,
+                    C = this.C,
+                    has = this._has;
 
-                if (typeof(b) != "undefined" && typeof(c) != "undefined" && typeof(alpha) != "undefined")
+                if (has(this._a))
                 {
-                    this.a = Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) - 2 * b * c * Math.cos(alpha));
+                    return this._a;
+                }
+                else if (has(b) && has(c) && has(alpha))
+                {
+                    this.a = Math.sqrt(Math.pow(b, 2) + Math.pow(c, 2) -
+                                       2 * b * c * Math.cos($M.Geometrix.degToRad(alpha)));
+                }
+                else if (has(B) && has(C))
+                {
+                    this.a = Math.sqrt(Math.pow(B.x - C.x, 2) + Math.pow(B.y - C.y, 2));
+                }
+                else
+                {
+                    this.a = null;
                 }
 
                 return this._a;
@@ -65,10 +90,23 @@
         return $M;
     };
 
-    var define = global.define || null;
-
-    if (define && define.amd)
-        define(["./Geometrix"], triangle);
-    else
-        return triangle(global.$M);
-})(this);
+    /* istanbul ignore next */
+    (function (global, factory)
+    {
+        /* TODO
+         if (typeof(exports) === "object")
+         {
+         module.exports = factory();
+         }
+         else
+         */
+        if (typeof(define) === "function" && define.amd)
+        {
+            define(["./Geometrix"], factory);
+        }
+        else
+        {
+            global.$M = factory(global.$M);
+        }
+    })(this, triangle);
+})();

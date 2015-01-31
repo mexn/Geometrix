@@ -1,7 +1,7 @@
 /**
  * Created by Markus on 16.01.2015.
  */
-(function (global)
+(function ()
 {
     "use strict";
 
@@ -77,10 +77,23 @@
         return $M;
     };
 
-    var define = global.define || null;
-
-    if (define && define.amd)
-        define(["./Geometrix"], point);
-    else
-        return point(global.$M);
-})(this);
+    /* istanbul ignore next */
+    (function (global, factory)
+    {
+        /* TODO
+         if (typeof(exports) === "object")
+         {
+            module.exports = factory();
+         }
+         else
+         */
+        if (typeof(define) === "function" && define.amd)
+        {
+            define(["./Geometrix"], factory);
+        }
+        else
+        {
+            global.$M = factory(global.$M);
+        }
+    })(this, point);
+})();
