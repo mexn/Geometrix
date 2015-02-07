@@ -5,6 +5,20 @@
 {
     "use strict";
 
+    function evaluateFix (fix, arg)
+    {
+        if (typeof(fix) == "string")
+            return fix;
+
+        if (typeof(fix) == "function")
+            return fix(arg);
+
+        if (fix || fix === false && fix.toString)
+            return fix.toString();
+
+        return "";
+    }
+
     var m = function ($M)
     {
         /* istanbul ignore if */
@@ -14,7 +28,14 @@
         /**
          * @namespace $M
          */
+
         return {
+            /**
+             * @typedef {Object} $M~extendOptions
+             * @property suffix {string} - The suffix to add to the extending properties' keys
+             * @property prefix {string} - The prefix to add to the extending properties' keys
+             */
+
             /**
              * @static
              * @memberof! $M
@@ -23,29 +44,37 @@
              * @param {Object} arg1 - Target of all copied properties.
              * @param {Object} arg2 - Object which's properties should be copied
              * @param {Object} [arg3] - n other objects to copy into their predecessor.
+             * @param {$M~extendOptions} [o] - If the last parameter is of type {@link $M~extendOptions}, the extending properties' keys are suffixed/prefixed
              * @returns {Object} The resulting object
              */
-            extend: function (arg1, arg2, arg3)
+            extend: function (arg1, arg2, arg3, o)
             {
-                var o = arguments[0] || {};
+                var args = Array.prototype.slice.call(arguments),
+                    obj = args && args.length ? args.shift() || {} : {},
+                    lastArg = args.length > 2 ? args.pop() : {},
+                    suffix = "suffix" in lastArg ? lastArg.suffix : undefined,
+                    prefix = "prefix" in lastArg ? lastArg.prefix : undefined;
 
-                Array.prototype.slice.call(arguments).forEach(function (arg, i)
+                if (suffix === undefined && prefix === undefined)
                 {
-                    if (i === 0)
-                    {
-                        return;
-                    }
+                    args.push(lastArg); // if the last argument does not contain any semantic meanings, re-add it to the collection, as it is then a relevant object
+                }
 
+                args.forEach(function (arg)
+                {
                     for (var key in arg)
                     {
                         if (arg.hasOwnProperty(key))
                         {
-                            o[key] = arg[key];
+                            var prfx = evaluateFix(prefix, arg),
+                                sffx = evaluateFix(suffix, arg);
+
+                            obj[prfx + key + sffx] = arg[key];
                         }
                     }
                 });
 
-                return o;
+                return obj;
             }
         };
     };
